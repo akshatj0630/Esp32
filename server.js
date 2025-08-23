@@ -1,16 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-app.use(cors({
-  origin: "*"
-}))
-
+const cors = require("cors");
 
 const app = express();
+
+// Middleware
 app.use(bodyParser.json());
+app.use(cors({ origin: "*" }));
 
 // --- MongoDB Connection ---
-const mongoURI = process.env.MONGO_URI;  // will come from Render env vars
+const mongoURI = process.env.MONGO_URI;  // from Render env vars
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.error("❌ MongoDB error:", err));
